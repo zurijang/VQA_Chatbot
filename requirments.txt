@@ -1,0 +1,5 @@
+django~=3.0.0
+python-telegram-bot
+requests
+django-bootstrap4
+opencv-python
