@@ -3,6 +3,7 @@ python-telegram-bot
 requests
 django-bootstrap4
 opencv-python
+django-environ
 
 gunicorn
 django-heroku
