@@ -63,6 +63,7 @@ def webhook(request):
             load_image = DATA_IMAGE.objects.filter(WORKER_ID=userName).order_by('-IMAGE_ID')
             print('image loading')
             print(load_image[0]) # 예외 걸리는 부분
+            bot.send_message(chat_id=chatID, text="image")
 
             try: # 연속 이미지 등록에 대한 예외 처리 
                 # 조회된 이미지에 대한 질문 조회
