@@ -2,7 +2,7 @@ import telegram
 from VQA_Chatbot import settings
 bot = telegram.Bot(token=settings.TELEGRAM_TOKEN)
 # updates = bot.getUpdates()
-bot.set_webhook("https://52ce16c1196d.ngrok.io/Chatbot/webhook")
+bot.set_webhook("https://vqachatbot.herokuapp.com//Chatbot/webhook")
 
 # updater = Updater(token=settings.TELEGRAM_TOKEN)
 # dispatcher = updater.dispatcher # 이벤트가 왔을때 처리해주는 객체
