@@ -7,10 +7,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-import environ
-
-env = environ.Env()
-
 # SECURITY WARNING: keep the secret key used in production secret!
 
 with open("secrets.json") as f:
@@ -23,10 +19,12 @@ def get_secret(setting, secrets=secrets):
         error_msg = "Set the {0} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = env.str("SECRET_KEY", get_secret("SECRET_KEY"))
+# SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_secret("SECRET_KEY"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', True)
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,8 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 TELEGRAM_TOKEN = os.environ["VQA_TOKEN"]
 
-try:
-    import django_heroku
-    django_heroku.settings(locals())
-except ImportError:
-    print("Can't import django_heroku.")
+# Heroku: Update database configuration from $DATABASE_URL. 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
