@@ -11,7 +11,7 @@ class IMAGEAdmin(admin.ModelAdmin):
 
 class QUESTIONAdmin(admin.ModelAdmin):
     list_display = ['QUESTION_ID', 'IMAGE_ID', 'QUESTION', 'STATUS' ,'QUESTION_CNT']
-    serach_fields = ['IMAGE_ID', 'STATUS']
+    search_fields = ['IMAGE_ID', 'STATUS']
 
 class ANSWERAdmin(admin.ModelAdmin):
     list_display = ['ANSWER_ID', 'QUESTION_ID', 'ANSWER']
