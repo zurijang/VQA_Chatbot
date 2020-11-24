@@ -4,3 +4,4 @@ db.sqlite3
 ngrok.exe
 *.ipynb
 data
+.idea
