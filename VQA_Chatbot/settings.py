@@ -9,18 +9,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-with open("secrets.json") as f:
-    secrets = json.loads(f.read())
+# with open("secrets.json") as f:
+#     secrets = json.loads(f.read())
 
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {0} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
+# def get_secret(setting, secrets=secrets):
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         error_msg = "Set the {0} environment variable".format(setting)
+#         raise ImproperlyConfigured(error_msg)
 
-# SECRET_KEY = get_secret("SECRET_KEY")
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_secret("SECRET_KEY"))
+# # SECRET_KEY = get_secret("SECRET_KEY")
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_secret("SECRET_KEY"))
+SECRET_KEY = "_*b42crfdz8rn&n1royi83-7w4#=8luy#b#e8ik#gwyo8n*09i"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
