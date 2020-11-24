@@ -1,0 +1,1 @@
+web: gunicorn VQA_Chatbot.wsgi

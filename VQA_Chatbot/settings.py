@@ -124,3 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TELEGRAM_TOKEN = os.environ["VQA_TOKEN"]
+
+try:
+    import django_heroku
+    django_heroku.settings(locals())
+except ImportError:
+    print("Can't import django_heroku.")
