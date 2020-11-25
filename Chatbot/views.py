@@ -63,9 +63,8 @@ def webhook(request):
             load_image = DATA_IMAGE.objects.filter(WORKER_ID=userName).order_by('-IMAGE_ID')
             print('image loading')
             print(load_image[0]) # 예외 걸리는 부분
-            image = load_image[0] # heroku 예외
-            bot.send_message(chat_id=chatID, text="image")
-
+            # image_test = load_image[0] # heroku 예외
+            
             try: # 연속 이미지 등록에 대한 예외 처리 
                 # 조회된 이미지에 대한 질문 조회
                 print('question loading')
@@ -142,6 +141,17 @@ def webhook(request):
 
                 received_text = telegram_update['message']['text'] # 사용자로부터 입력받은 메시지
                 
+                if received_text=='/상태': 
+                    print('상태')
+                    count_total_image = DATA_IMAGE.objects.filter(WORKER_ID=userName).count()
+                    count_complete_image = DATA_IMAGE.objects.filter(WORKER_ID=userName, STATUS=1).count()
+                    count_pause_image = DATA_IMAGE.objects.filter(WORKER_ID=userName, STATUS=9).count()
+                    count_ing_image = DATA_IMAGE.objects.filter(WORKER_ID=userName, STATUS=0).count()
+                    text = '''{0}님은 {1}개의 사진을 등록하셨습니다.
+완료 : {2}  중지 : {3}  진행 : {4}'''.format(userName, count_total_image, count_complete_image, count_pause_image, count_ing_image)
+                    bot.send_message(chat_id=chatID, text=text)
+                    return HttpResponse(str(count_total_image))
+
                 # 중간에 사용방법 요청
                 if received_text=='/사용방법':
                     print('사용방법')
